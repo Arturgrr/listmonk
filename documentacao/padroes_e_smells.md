@@ -335,21 +335,6 @@ A função continua grande porque ainda possui outras responsabilidades, porém 
 - melhorou a legibilidade;
 - criou funções reutilizáveis.
 
-## 3.8 Princípio SOLID relacionado
-
-### Single Responsibility Principle — SRP
-
-O SRP afirma que uma unidade de software deve possuir um único motivo principal para mudar.
-
-Antes, `UpdateSettings` precisava mudar sempre que qualquer regra de normalização ou validação fosse alterada.
-
-Após a extração, as responsabilidades ficaram melhor separadas:
-
-- `UpdateSettings` coordena a atualização das configurações;
-- `NormalizeDomains` normaliza domínios;
-- `NormalizeFileExtensions` normaliza extensões;
-- `NormalizeTrustedURLs` normaliza e valida URLs confiáveis.
-
 ## 3.9 Testes adicionados
 
 Os testes verificam:
@@ -566,31 +551,6 @@ As funções específicas também ficaram pequenas:
 2  (*App).processLettermintBounceWebhook
 2  (*App).normalizeBounceWebhookError
 ```
-
-## 4.7 Princípios SOLID relacionados
-
-### Single Responsibility Principle — SRP
-
-Cada processador passou a cuidar de apenas um provedor.
-
-Por exemplo:
-
-- `processSESBounceWebhook` contém somente as regras do SES;
-- `processAzureBounceWebhook` contém somente as regras do Azure;
-- `processSendgridBounceWebhook` contém somente as regras do SendGrid.
-
-`BounceWebhook` passou a apenas coordenar o fluxo geral.
-
-### Open/Closed Principle — OCP
-
-O fluxo principal ficou mais aberto para extensão e menos dependente de modificações.
-
-Para incluir um novo provedor, é possível:
-
-1. criar um novo método processador;
-2. registrá-lo em `bounceWebhookHandlers`.
-
-A lógica dos processadores existentes não precisa ser modificada.
 
 ## 4.8 Commit relacionado
 
